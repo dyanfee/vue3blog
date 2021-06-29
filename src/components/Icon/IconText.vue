@@ -18,10 +18,6 @@ export default {
       default: "",
       required: true,
     },
-    text: {
-      type: String || Number,
-      default: "",
-    },
     position: {
       type: String,
       default: "left",

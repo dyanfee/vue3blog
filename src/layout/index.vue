@@ -10,9 +10,7 @@
         </div>
         <div v-if="showRight" class="right-content">right-content</div>
       </div>
-      <div class="footer">
-        <h1>footer</h1>
-      </div>
+      <base-footer />
     </div>
   </div>
 </template>
@@ -24,13 +22,14 @@ import { mapGetters } from "vuex";
 import Header from "components/header";
 import { resizeMixin, resizeHandler } from "./resizeHandler";
 import YfTransition from "components/comm-transition";
-
+import BaseFooter from "components/BaseFooter";
 export default {
   name: "Layout",
   mixins: [resizeMixin],
   components: {
     Header,
     YfTransition,
+    BaseFooter,
   },
   computed: {
     ...mapGetters(["plateform"]),
@@ -43,20 +42,20 @@ export default {
     // 钩子函数
     onMounted(() => {
       resizeHandler(({ width }) => {
-        let vnode = mainContent.value;
-        vnode.style && (vnode.style.maxWidth = "");
-        vnode.style && (vnode.style.padding = "100px 0 0");
+        let mainStyle = mainContent.value.style;
+        mainStyle.maxWidth = "";
+        mainStyle.padding = "100px 0 0";
         if (width > 1280) {
-          vnode.style && (vnode.style.width = "1280px");
+          mainStyle.width = "1280px";
           showLeft.value = showRight.value = true;
         } else if (width > 992) {
-          vnode.style && (vnode.style.width = "992px");
+          mainStyle.width = "992px";
           showLeft.value = false;
           showRight.value = true;
         } else {
-          vnode.style && (vnode.style.width = width + "px");
-          vnode.style && (vnode.style.maxWidth = "640px");
-          vnode.style && (vnode.style.padding = "70px 5px 0");
+          mainStyle.width = width + "px";
+          mainStyle.maxWidth = "640px";
+          mainStyle.padding = "70px 5px 0";
           showLeft.value = showRight.value = false;
         }
       });
@@ -87,6 +86,7 @@ export default {
   flex: 1;
   flex-direction: column;
   box-sizing: border-box;
+  position: relative;
   .content {
     display: flex;
     margin: 0 auto;
@@ -110,13 +110,6 @@ export default {
       flex-shrink: 0;
       margin-left: 20px;
     }
-  }
-  .footer {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    height: 120px;
-    border: 2px thistle solid;
   }
 }
 </style>

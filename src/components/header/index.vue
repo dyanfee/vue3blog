@@ -7,8 +7,12 @@
       <Category />
     </div>
     <div class="header-other">
-      <span>登录</span>
-      <span>注册</span>
+      <router-link to="/login">
+        <span> 登录 </span>
+      </router-link>
+      <router-link to="/register">
+        <span>注册</span>
+      </router-link>
     </div>
   </div>
 </template>
@@ -32,6 +36,7 @@ export default {
   font-size: 14px;
   box-shadow: 0 2px 3px rgba($color: #000, $alpha: 0.1);
   display: flex;
+  z-index: 99;
   .header-logo {
     display: flex;
     align-items: center;

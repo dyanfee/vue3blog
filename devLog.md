@@ -9,10 +9,26 @@
 
 * header 组件开发完成
 
-# 2121.6.28
+# 2021.6.28
 
 * 修复刷新界面 导航动画不匹配
 * 主界面动态适配
 * 引入svgIcon
 * 文章卡片布局完善
 * 文章卡片动画封装mixin函数
+
+# 2021.6.29
+
+* 构建登录界面
+
+* 解决input历史记录时，背景颜色改变
+
+  ```css
+  //css 解决
+  input:-webkit-autofill {
+    box-shadow: 0 0 0 50px white inset; // 关键代码
+    -webkit-text-fill-color: #666; // 修改输入字体颜色
+  }
+  ```
+
+* footer 开发
