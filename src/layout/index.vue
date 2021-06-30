@@ -2,13 +2,12 @@
   <div class="app-container">
     <div class="layout">
       <Header></Header>
-
       <div ref="mainContent" class="content">
-        <div v-if="showLeft" class="left-content">left-content</div>
+        <side-bar-left v-if="showLeft" />
         <div class="main">
           <router-view />
         </div>
-        <div v-if="showRight" class="right-content">right-content</div>
+        <side-bar-right v-if="showRight" />
       </div>
       <base-footer />
     </div>
@@ -23,6 +22,8 @@ import Header from "components/header";
 import { resizeMixin, resizeHandler } from "./resizeHandler";
 import YfTransition from "components/comm-transition";
 import BaseFooter from "components/BaseFooter";
+import SideBarLeft from "components/side-bar/SideBarLeft";
+import SideBarRight from "components/side-bar/SideBarRight";
 export default {
   name: "Layout",
   mixins: [resizeMixin],
@@ -30,6 +31,8 @@ export default {
     Header,
     YfTransition,
     BaseFooter,
+    SideBarLeft,
+    SideBarRight,
   },
   computed: {
     ...mapGetters(["plateform"]),
@@ -49,7 +52,7 @@ export default {
           mainStyle.width = "1280px";
           showLeft.value = showRight.value = true;
         } else if (width > 992) {
-          mainStyle.width = "992px";
+          mainStyle.maxWidth = "992px";
           showLeft.value = false;
           showRight.value = true;
         } else {
@@ -81,26 +84,18 @@ export default {
 <style lang="scss" scoped>
 .layout {
   background-color: #f5f5f5;
-  width: 100%;
+  // width: 100%;
   display: flex;
   flex: 1;
   flex-direction: column;
   box-sizing: border-box;
-  position: relative;
   .content {
     display: flex;
     margin: 0 auto;
-    // margin-top: 100px;
     padding-top: 100px;
     min-height: 80vh;
     flex: 1;
     width: 100%;
-    .left-content {
-      width: 300px;
-      border: 1px teal solid;
-      flex-shrink: 0;
-      margin-right: 20px;
-    }
     .main {
       width: 100%;
     }

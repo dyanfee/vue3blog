@@ -10,7 +10,9 @@
     --color-background: #ffffff;
     --font-size       : 14px;
     --line-height     : 1.5;
-    --border-color    : rgba(0, 0, 0, 0.1)
+    --border-color    : rgba(0, 0, 0, 0.1);
+
+
 }
 
 *,
@@ -31,10 +33,12 @@ body {
     background-color           : var(--color-background);
     color                      : var(--color-text);
     width                      : 100vw;
+    overflow-y                 : auto;
+    overflow-x                 : hidden;
 }
 
 a {
-    color             : var(--color-text);
+    color          : var(--color-text);
     text-decoration: none;
 }
 

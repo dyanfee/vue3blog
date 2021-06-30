@@ -1,5 +1,7 @@
 <template>
-  <article-card v-for="item in 10" :key="item"></article-card>
+  <div class="home">
+    <article-card v-for="item in 10" :key="item"></article-card>
+  </div>
 </template>
 
 <script>
@@ -13,4 +15,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home {
+  width: 100%;
+}
 </style>
