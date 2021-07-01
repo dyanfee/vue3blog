@@ -1,5 +1,5 @@
 <template>
-  <yf-transition>
+  <!-- <yf-transition> -->
     <div class="category">
       <CateItem
         class=""
@@ -12,7 +12,7 @@
         {{ item.name }}
       </CateItem>
     </div>
-  </yf-transition>
+  <!-- </yf-transition> -->
 </template>
 
 <script>

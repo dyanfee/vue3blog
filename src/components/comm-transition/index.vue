@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { hasClass, addClass, removeClass } from "@/utils";
 export default {
   name: "YfTransition",
   props: {
@@ -15,54 +16,6 @@ export default {
     },
   },
   setup() {
-    const trim = function (s) {
-      return (s || "").replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, "");
-    };
-    function hasClass(el, cls) {
-      if (!el || !cls) return false;
-      if (cls.indexOf(" ") !== -1) throw new Error("元素类名不能包含空格");
-      if (el.classList) {
-        return el.classList.contains(cls);
-      } else {
-        return (" " + el.className + " ").indexOf(" " + cls + " ") !== -1;
-      }
-    }
-
-    function addClass(el, cls) {
-      if (!el || !cls) return;
-      let curClass = el.className;
-      const clses = cls.split("");
-      for (let i = 0, j = clses.length; i < j; i++) {
-        const clsName = clses[i];
-        if (!clsName) continue;
-        if (el.classList) {
-          el.classList.add(clsName);
-        } else if (!hasClass(el, clsName)) {
-          curClass += " " + clsName;
-        }
-        if (!el.classList) {
-          el.className = curClass;
-        }
-      }
-    }
-    function removeClass(el, cls) {
-      if (!el || !cls) return;
-      const clses = cls.split(" ");
-      let curClass = " " + el.className + " ";
-      for (let i = 0, j = clses.length; i < j; i++) {
-        const clsName = clses[i];
-        if (!clsName) continue;
-
-        if (el.classList) {
-          el.classList.remove(clsName);
-        } else if (hasClass(el, clsName)) {
-          curClass = curClass.replace(" " + clsName + " ", " ");
-        }
-      }
-      if (!el.classList) {
-        el.className = trim(curClass);
-      }
-    }
     return {
       on: {
         // @before-enter="beforeEnter"
@@ -79,14 +32,14 @@ export default {
         },
         enter(el, done) {
           console.log("enter");
-          // addClass(el, "comm-opacity-transition");
-          // el.style.opacity = 1;
+          addClass(el, "comm-opacity-transition");
+          el.style.opacity = 1;
           done();
         },
         afterEnter(el) {
           console.log("afterEnter");
           removeClass(el, "comm-opacity-transition");
-          // el.style.opacity = "";
+          el.style.opacity = "";
         },
         beforeLeave(el) {
           console.log("beforeLeave");

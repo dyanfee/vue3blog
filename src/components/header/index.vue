@@ -34,7 +34,7 @@ export default {
   background-color: #fff;
   height: 60px;
   font-size: 14px;
-  box-shadow: 0 2px 3px rgba($color: #000, $alpha: 0.1);
+  box-shadow: 0 2px 12px rgba($color: #000, $alpha: 0.1);
   display: flex;
   z-index: 99;
   .header-logo {

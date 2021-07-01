@@ -71,21 +71,19 @@ span {
   position: absolute;
   top: -30px;
   border-radius: 30px;
-  // box-shadow: 0 0 3px $color-high-text;
   transition: all 1s ease-in-out;
   &:hover {
     transform: rotate(360deg) scale(1.2);
   }
 }
 .nick-name {
+  @include border-bottom;
+  display: flex;
   font-size: 20px;
   font-weight: 700;
   padding-top: 30px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba($color: $color-high-text, $alpha: 0.3);
-  display: flex;
   justify-content: center;
-  width: 100%;
 }
 .my-info {
   display: flex;

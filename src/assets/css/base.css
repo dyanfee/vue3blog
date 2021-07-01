@@ -70,3 +70,18 @@ a {
 .main-bgc {
     background-color: #fff;
 }
+
+/* 基础卡片样式 */
+.base-card {
+    font-size      : 14px;
+    position       : relative;
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    background     : #fff;
+    padding        : 20px;
+    margin-bottom  : 20px;
+    border-radius  : 5px;
+    box-shadow     : 0 2px 12px rgba(0, 0, 0, 0.1);
+}
