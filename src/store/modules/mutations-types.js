@@ -1,1 +1,2 @@
-export const TOGGLE_PLATEFORM = "TOGGLE_DEVICE"
+export const TOGGLE_PLATEFORM = "TOGGLE_DEVICE";
+export const SET_TOKEN = "SET_TOKEN"

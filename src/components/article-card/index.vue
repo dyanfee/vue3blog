@@ -1,23 +1,37 @@
 <template>
   <div class="article-card">
     <div class="article-card-header">
-      <div class="article-card-name">article-card-name</div>
+      <div class="article-card-name">{{ item.title }}</div>
       <div class="article-card-desc">
-        <icon-text class="article-card-desc_item" i="eye">27</icon-text>
-        <icon-text class="article-card-desc_item" i="comment">0</icon-text>
+        <icon-text class="article-card-desc_item" i="eye">
+          {{ item.views }}
+        </icon-text>
+        <!-- <icon-text class="article-card-desc_item" i="heart">
+          {{ item.like }}
+        </icon-text> -->
+        <icon-text class="article-card-desc_item" i="comment">
+          {{ item.like }}
+        </icon-text>
       </div>
     </div>
     <div class="article-card-content">
       <span>
-        容这是这是内容这是内容是内容这是这是内容这内容这是内容这是内容这是内容
+        {{ item.content }}
       </span>
     </div>
     <div class="article-card-footer">
-      <icon-text class="article-card-desc_item" i="user">七月</icon-text>
+      <icon-text class="article-card-desc_item" i="user">{{
+        item.nickName
+      }}</icon-text>
+      <!-- <div class="article-card-footer__center">
+        分类:{{ item.category }}
+      </div> -->
       <div class="article-card-footer__center">
         <tag>Vue</tag>
       </div>
-      <div class="article-card-footer__right">2021.06.26 11:11</div>
+      <div class="article-card-footer__right">
+        {{ formatTime(item.create_time) }}
+      </div>
     </div>
   </div>
 </template>
@@ -25,14 +39,29 @@
 <script>
 import IconText from "components/Icon/IconText.vue";
 import Tag from "components/Tag";
-import { inject } from "@vue/runtime-core";
+import { formatDate } from "@/utils";
 export default {
   name: "ArticleCard",
+  props: {
+    item: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+  },
+  setup(props) {
+    function formatTime(value) {
+      const date = new Date(value);
+      return formatDate(date);
+    }
+    formatTime(props.item.create_time);
+    return { formatTime };
+  },
   components: {
     IconText,
     Tag,
   },
-
 };
 </script>
 

@@ -1,5 +1,11 @@
 # vue3blog
 
+## 前端采用vue3全家桶搭建
+## 后端采用express+mysql
+
+## 开发日志
+[开发日志](./devLog.md)
+
 ## Project setup
 ```
 npm install

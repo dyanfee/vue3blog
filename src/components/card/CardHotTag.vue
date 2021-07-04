@@ -4,7 +4,7 @@
       <div>最热标签</div>
     </template>
     <template v-slot:right>
-      <router-link to="/tag">
+      <router-link to="/tags">
         <span>所有标签</span>
       </router-link>
     </template>
