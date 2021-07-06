@@ -30,6 +30,11 @@ const constantRoutes = [
         path: 'archives',
         name: 'Archives',
         component: () => import('views/archives/Archives'),
+      },
+      {
+        path: '/detail/:id',
+        name: 'Detail',
+        component: () => import('views/detail/Detail'),
       }
     ]
   },

@@ -45,3 +45,7 @@ $border-color          : rgba(0, 0, 0, 0.1);
 @mixin shadow($s:5px) {
     box-shadow: 0 0 $s rgba(0, 0, 0, 0.1);
 }
+
+%base-shadow{
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}

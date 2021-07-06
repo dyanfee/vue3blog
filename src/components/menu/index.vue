@@ -44,6 +44,7 @@ export default {
     });
     const curIndex = computed(() => {
       const app = getCurrentInstance();
+      // 直接获取
       const route = app.appContext.config.globalProperties.$route;
       // console.log(route);
       return route.path;

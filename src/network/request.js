@@ -3,7 +3,7 @@ import axios from 'axios'
 // 默认类型
 // axios.defaults.headers.post['Content-type'] = 'application/json'
 
-console.log('环境:', process.env.NODE_ENV,'\nBaseUrl', process.env.VUE_APP_BASE_API)
+console.log('环境:', process.env.NODE_ENV, '\nBaseUrl', process.env.VUE_APP_BASE_API)
 const instance = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
     timeout: 5000
@@ -16,6 +16,10 @@ instance.interceptors.request.use(config => {
 })
 
 instance.interceptors.response.use(res => {
+    // 1000 请求失败
+    if (res.data && res.data.code == 1000) {
+        alert(res.data.message)
+    }
     return res.data
 }, err => {
     if (err.message) {

@@ -74,8 +74,7 @@ export default {
     };
   },
   beforeRouteUpdate(to, from, next) {
-    // console.log("33333", to);
-    // console.log("----", to.path);
+
     next();
   },
 };
@@ -83,8 +82,6 @@ export default {
 
 <style lang="scss" scoped>
 .layout {
-  background-color: #f5f5f5;
-  // width: 100%;
   display: flex;
   flex: 1;
   flex-direction: column;

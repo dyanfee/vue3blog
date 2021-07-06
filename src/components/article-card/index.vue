@@ -1,5 +1,5 @@
 <template>
-  <div class="article-card">
+  <div @click="clickCard" class="article-card">
     <div class="article-card-header">
       <div class="article-card-name">{{ item.title }}</div>
       <div class="article-card-desc">
@@ -23,14 +23,11 @@
       <icon-text class="article-card-desc_item" i="user">{{
         item.nickName
       }}</icon-text>
-      <!-- <div class="article-card-footer__center">
-        分类:{{ item.category }}
-      </div> -->
       <div class="article-card-footer__center">
-        <tag>Vue</tag>
+        <tag @click.stop="clickCate">{{ item.category }}</tag>
       </div>
       <div class="article-card-footer__right">
-        {{ formatTime(item.create_time) }}
+        {{ formatTime(item.createTime) }}
       </div>
     </div>
   </div>
@@ -40,6 +37,7 @@
 import IconText from "components/Icon/IconText.vue";
 import Tag from "components/Tag";
 import { formatDate } from "@/utils";
+import { useRoute, useRouter } from "vue-router";
 export default {
   name: "ArticleCard",
   props: {
@@ -51,12 +49,25 @@ export default {
     },
   },
   setup(props) {
+    const router = useRouter();
+
     function formatTime(value) {
       const date = new Date(value);
       return formatDate(date);
     }
-    formatTime(props.item.create_time);
-    return { formatTime };
+    function clickCard() {
+      router.push({
+        path: "/detail/" + props.item.id,
+      });
+    }
+    function clickCate(e) {
+      console.log(e);
+    }
+    return {
+      formatTime,
+      clickCard,
+      clickCate,
+    };
   },
   components: {
     IconText,
