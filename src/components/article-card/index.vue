@@ -87,7 +87,7 @@ export default {
   box-shadow: 0 0 2px rgba($color: #000, $alpha: 0.2);
   width: 100%;
   box-sizing: border-box;
-  color: $color-text;
+  color: $color-text-comm;
   border-radius: 6px;
 
   .article-card-header {

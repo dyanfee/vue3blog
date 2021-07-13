@@ -7,22 +7,43 @@
       <Category />
     </div>
     <div class="header-other">
-      <router-link to="/login">
-        <span> 登录 </span>
-      </router-link>
-      <router-link to="/register">
-        <span>注册</span>
-      </router-link>
+      <div v-if="!isLogin">
+        <router-link to="/login">
+          <span> 登录 </span>
+        </router-link>
+        <router-link to="/register">
+          <span>注册</span>
+        </router-link>
+      </div>
+      <div v-else>
+        <span>{{ nickName }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Category from "components/menu";
+import { computed, ref } from "@vue/runtime-core";
+import { useStore } from "vuex";
 export default {
   name: "Header",
   components: {
     Category,
+  },
+  setup() {
+    const store = useStore();
+    // const nickName = ref("");
+    const isLogin = computed(() => {
+      return store.getters.isLogin;
+    });
+    // nickName.value = store.getters.nickName;
+    const nickName = computed(() => store.getters.nickName);
+    console.log(nickName.value);
+    return {
+      nickName,
+      isLogin,
+    };
   },
 };
 </script>

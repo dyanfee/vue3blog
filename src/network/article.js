@@ -7,14 +7,13 @@ export function getArticles(params) {
     return request({
         url: '/articles',
         method: "GET",
-        data: params
+        params
     })
 }
 /** 
  * 通过id获取文章
  */
 export function getArticle(params) {
-    console.log('-----')
     return request({
         url: '/article',
         method: "GET",

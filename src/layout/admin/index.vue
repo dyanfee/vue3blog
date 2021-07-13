@@ -1,12 +1,16 @@
 <template>
-  <div>评论部分</div>
+<!-- 后台界面 -->
+<div>
+  
+</div>
 </template>
 
 <script>
 export default {
-  name:"Comment"
-};
+
+}
 </script>
 
 <style lang='scss' scoped>
+
 </style>

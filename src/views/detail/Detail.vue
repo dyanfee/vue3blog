@@ -26,15 +26,27 @@
         </div>
       </div>
       <div class="detail_footer-button">
-        <my-button @click="clickShare" color="#e87461">
+        <custom-button @click="clickShare" color="#e87461">
           <icon-text i="share">分享</icon-text>
-        </my-button>
-        <my-button @click="clickLike" color="#04aac7">
+        </custom-button>
+        <custom-button @click="clickLike" color="#04aac7">
           <icon-text i="thumbs-up">点赞</icon-text>
-        </my-button>
+        </custom-button>
       </div>
     </div>
-    <comment />
+    <div class="comment-area">
+      <comment-input
+        @replySuccess="replySuccess"
+        :replyInfo="replyInfo"
+      ></comment-input>
+      <comment-item
+        @replySuccess="replySuccess"
+        :comment="item"
+        root
+        v-for="item in comments"
+        :key="item.id"
+      />
+    </div>
   </div>
 </template>
 
@@ -42,28 +54,55 @@
 import { onMounted, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { getArticle } from "network/article";
-import MyButton from "components/button";
+import { getComments } from "network/comment";
+import { useStore } from "vuex";
+import CustomButton from "components/button/CustomButton";
 import IconText from "components/Icon/IconText";
-import Comment from "components/comment";
+import Icon from "components/Icon";
+import CommentInput from "components/comment/CommentInput";
+import MyButton from "components/button";
+import CommentItem from "components/comment/CommentItem";
 export default {
   name: "Detail",
   components: {
     IconText,
+    CustomButton,
     MyButton,
-    Comment,
+    Icon,
+    CommentInput,
+    CommentItem,
+  },
+  data() {
+    return {
+      // replyInfo:{}
+    };
   },
   setup(props) {
     const route = useRoute();
     const post = ref({});
-
+    const comments = ref({});
+    const replyInfo = ref({});
+    const store = useStore();
+    const id = route.params.id || "";
     onMounted(() => {
-      const id = route.params.id || "";
+      replyInfo.value = {
+        articleId: id,
+        userId: store.getters.userId,
+        type: 1,
+      };
       _getArticle(id);
+      _getComments(id);
     });
 
     function _getArticle(id) {
       getArticle({ id }).then((res) => {
         post.value = res.body;
+      });
+    }
+    // 获取评论列表
+    function _getComments(id) {
+      getComments({ id }).then((res) => {
+        comments.value = res.body;
       });
     }
     function clickLike() {
@@ -72,10 +111,20 @@ export default {
     function clickShare() {
       console.log("clickShare");
     }
+    function submit(e) {
+      console.log(e);
+    }
+    function replySuccess() {
+      _getComments(id);
+    }
     return {
       post,
+      comments,
+      replyInfo,
       clickLike,
       clickShare,
+      submit,
+      replySuccess,
     };
   },
 };
@@ -89,7 +138,7 @@ export default {
   background-color: #fff;
   min-height: 100vh;
   width: 100%;
-  padding: 10px;
+  padding: 10px 0;
   @extend %base-shadow;
 
   .detail_header {
@@ -102,7 +151,7 @@ export default {
     display: flex;
     font-size: 14px;
     color: #666;
-    padding-bottom: 30px;
+    padding: 0 10px 30px;
     & > * {
       padding-right: 10px;
     }
@@ -110,9 +159,13 @@ export default {
 
   .detail_content {
     width: 100%;
+    padding: 0 10px;
   }
   .detail_footer {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    padding: 0 10px;
     .detail_footer-updtime {
       display: flex;
       justify-content: flex-end;
@@ -141,6 +194,10 @@ export default {
         margin: 0 10px;
       }
     }
+  }
+  .comment-area {
+    width: 100%;
+    padding: 40px 10px;
   }
 }
 </style>

@@ -11,6 +11,7 @@
           class="login-input_area"
           type="text"
           name="login"
+          v-model="username"
           placeholder="请输入用户名或邮箱"
         />
       </div>
@@ -19,9 +20,14 @@
           <label for="password">密码</label>
           <span>Forgot password?</span>
         </div>
-        <input type="password" name="password" placeholder="请输入密码" />
+        <input
+          type="password"
+          name="password"
+          v-model="password"
+          placeholder="请输入密码"
+        />
       </div>
-      <button>Sign in</button>
+      <button @click="clickLogin">Sign in</button>
     </div>
     <div class="login-to-signup">
       没有账号？
@@ -32,11 +38,49 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 import BaseFooter from "components/BaseFooter";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   name: "Login",
   components: {
     BaseFooter,
+  },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const username = ref("");
+    const password = ref("");
+
+    function clickLogin() {
+      if (!username.value) {
+        console.log("用户名不能为空");
+        return;
+      }
+      if (!password.value) {
+        console.log("密码不能为空");
+        return;
+      }
+      store
+        .dispatch("login", {
+          username: username.value,
+          password: password.value,
+        })
+        .then(
+          (reslove) => {
+            router.replace("/home");
+          },
+          (err) => {
+            console.error(err);
+          }
+        );
+    }
+    return {
+      username,
+      password,
+      clickLogin,
+    };
   },
 };
 </script>

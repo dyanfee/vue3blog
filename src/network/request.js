@@ -9,6 +9,11 @@ const instance = axios.create({
     timeout: 5000
 })
 
+if (localStorage.getItem('token')) {
+    // 带上token
+    instance.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem('token').replace(/(^\")|(\"$)/g, '')
+  }
+
 instance.interceptors.request.use(config => {
     return config
 }, err => {

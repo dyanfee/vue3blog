@@ -1,10 +1,11 @@
 <template>
+<!-- 前台界面 -->
   <div class="app-container">
     <div class="layout">
       <Header></Header>
-      <div ref="mainContent" class="content">
+      <div ref="appContainer" class="content">
         <side-bar-left v-if="showLeft" />
-        <div class="main">
+        <div ref="mainContent" class="main">
           <router-view />
         </div>
         <side-bar-right v-if="showRight" />
@@ -38,6 +39,7 @@ export default {
     ...mapGetters(["plateform"]),
   },
   setup(props, ctx) {
+    const appContainer = ref("appContainer");
     const mainContent = ref("mainContent");
     const showLeft = ref(true);
     const showRight = ref(true);
@@ -45,20 +47,23 @@ export default {
     // 钩子函数
     onMounted(() => {
       resizeHandler(({ width }) => {
-        let mainStyle = mainContent.value.style;
-        mainStyle.maxWidth = "";
-        mainStyle.padding = "100px 0 0";
+        let containerStyle = appContainer.value.style;
+        let main = mainContent.value.style;
+        containerStyle.maxWidth = "";
+        containerStyle.padding = "100px 0 0";
+        main.width = "";
         if (width > 1280) {
-          mainStyle.width = "1280px";
+          containerStyle.width = "1280px";
           showLeft.value = showRight.value = true;
         } else if (width > 992) {
-          mainStyle.maxWidth = "992px";
+          containerStyle.maxWidth = "992px";
+          main.width = "640px";
           showLeft.value = false;
           showRight.value = true;
         } else {
-          mainStyle.width = width + "px";
-          mainStyle.maxWidth = "640px";
-          mainStyle.padding = "70px 5px 0";
+          containerStyle.width = width + "px";
+          containerStyle.maxWidth = "640px";
+          containerStyle.padding = "70px 5px 0";
           showLeft.value = showRight.value = false;
         }
       });
@@ -68,13 +73,13 @@ export default {
       resizeHandler,
     });
     return {
-      mainContent,
+      appContainer,
       showLeft,
       showRight,
+      mainContent,
     };
   },
   beforeRouteUpdate(to, from, next) {
-
     next();
   },
 };

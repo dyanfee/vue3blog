@@ -10,15 +10,21 @@
 
 <script>
 import ArticleCard from "components/article-card";
-import { onMounted, ref } from "@vue/runtime-core";
+import { computed, onMounted, ref } from "@vue/runtime-core";
 import { getArticles } from "network/article";
+import { useStore } from "vuex";
 export default {
   name: "Home",
   components: {
     ArticleCard,
   },
   setup(props, ctx) {
-    const articles = ref({});
+    const store = useStore();
+    const articles = ref([]);
+
+    const isLogin = computed(() => {
+      return store.getters.isLogin;
+    });
     onMounted(() => {
       getArticles()
         .then((res) => {

@@ -1,5 +1,12 @@
 const getters = {
-    plateform: state => state.app.plateform
+    plateform: state => state.app.plateform,
+    userId: state => state.user.userId,
+    nickName: state => state.user.name,
+    avatar: state => state.user.avatar,
+    roles: state => state.user.roles,
+    email: state => state.user.email,
+    mobile: state => state.user.mobile,
+    isLogin: state => state.user.isLogin,
 }
 
 export default getters
