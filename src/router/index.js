@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/home/Home'
 import Layout from '@/layout'
+import Admin from '@/layout/admin'
 
 const constantRoutes = [
   {
@@ -41,6 +42,7 @@ const constantRoutes = [
   {
     path: '/tags',
     name: 'Tags',
+
     component: () => import('views/tags/Tags'),
   },
   {
@@ -51,7 +53,14 @@ const constantRoutes = [
     path: '/register',
     component: () => import('views/register/Register')
   },
-
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+    children: [
+      
+    ]
+  }
 
 ]
 

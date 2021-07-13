@@ -17,6 +17,9 @@
       </div>
       <div v-else>
         <span>{{ nickName }}</span>
+        <router-link to="/admin">
+          <span>个人中心</span>
+        </router-link>
       </div>
     </div>
   </div>

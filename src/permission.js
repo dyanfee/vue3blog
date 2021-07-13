@@ -24,7 +24,7 @@ router.beforeEach(async (to, from, next) => {
           // TODO 根据角色展示不同路由
           // console.log(info)
           // next({ ...to, replace: true })
-          next('/home')
+          next()
         } catch (error) {
           // 报错重新登录
           await store.dispatch('resetToken')

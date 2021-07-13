@@ -1,16 +1,59 @@
 <template>
-<!-- 后台界面 -->
-<div>
-  
-</div>
+  <!-- 后台界面 -->
+  <div class="app-container">
+    <side-bar />
+    <div class="main">
+      <div class="">
+        <nav-bar />
+        <tags-view />
+      </div>
+      aaaaa
+      <!-- <app-main /> -->
+    </div>
+  </div>
 </template>
 
-<script>
-export default {
 
-}
+<script>
+import { provide, onMounted } from "vue";
+import { resizeMixin, resizeHandler } from "../resizeHandler";
+import SideBar from "./components/SideBar";
+import TagsView from "./components/TagsView";
+import NavBar from "./components/NavBar";
+export default {
+  name: "Admin",
+  mixins: [resizeMixin],
+  components: {
+    SideBar,
+    TagsView,
+    NavBar,
+  },
+  setup(props, ctx) {
+    // 钩子函数
+    onMounted(() => {
+      resizeHandler(({ width }) => {});
+    });
+
+    provide("resize", {
+      resizeHandler,
+    });
+    return {};
+  },
+  beforeRouteUpdate(to, from, next) {
+    next();
+  },
+};
 </script>
 
-<style lang='scss' scoped>
-
+<style lang="scss" scoped>
+.app-container {
+  background-color: #f5f5f5;
+  height: 100vh;
+  .main {
+    width: 100%;
+    background-color: rgb(223, 223, 223);
+    .fixed-header {
+    }
+  }
+}
 </style>

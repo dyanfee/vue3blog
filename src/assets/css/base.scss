@@ -28,37 +28,45 @@ $border-color : rgba(0, 0, 0, 0.1);
 
 
 @mixin hover-up($shadow:3px, $transX:0px, $transY:0px) {
-    transition: all 0.3s;
+  transition: all 0.3s;
 
-    &:hover {
-        box-shadow   : 0 0 $shadow rgba(0, 0, 0, 0.3);
-        // transform : scale(1.03);
-        transform    : translate($transX, $transY)();
-    }
+  &:hover {
+    box-shadow   : 0 0 $shadow rgba(0, 0, 0, 0.3);
+    // transform : scale(1.03);
+    transform    : translate($transX, $transY)();
+  }
 }
 
 @mixin text-hover($color:$color-high-text, $h:$color-high-text-hover) {
-    color: $color;
+  color: $color;
 
-    &:hover {
-        color: $h;
-    }
+  &:hover {
+    color: $h;
+  }
 }
 
 @mixin border {
-    border       : 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+  border       : 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 @mixin border-bottom($color:$color-high-text, $alpha:0.3) {
-    width        : 100%;
-    border-bottom: 1px solid rgba($color, $alpha);
+  width        : 100%;
+  border-bottom: 1px solid rgba($color, $alpha);
 }
 
 @mixin shadow($s:5px) {
-    box-shadow: 0 0 $s rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 $s rgba(0, 0, 0, 0.1);
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear  : both;
+  }
 }
 
 %base-shadow {
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
