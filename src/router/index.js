@@ -58,11 +58,20 @@ const constantRoutes = [
     name: 'Admin',
     component: Admin,
     children: [
-      
+
     ]
   }
 
 ]
+
+const asyncRoutes = [{
+  path: '/admin',
+  name: 'Admin',
+  component: Admin,
+  children: [
+
+  ]
+}]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
