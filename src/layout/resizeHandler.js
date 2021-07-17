@@ -8,7 +8,6 @@ let curPalteform = ''
 let clientReact = {}
 
 function execHandler() {
-    window.log('onResize')
     // 根据屏幕判断平台
     jugePlateform()
     // 执行屏幕变化回调函数

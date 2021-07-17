@@ -1,69 +1,47 @@
 <template>
   <div class="side-bar-container">
     <logo />
-    <my-menu :default-active="activeMenu">
+    <el-menu
+      :uniqueOpened="false"
+      default-active="2"
+      @open="handleOpen"
+      @close="handleClose"
+      background-color="transparent"
+      text-color="#333"
+      active-text-color="#039eb9"
+    >
       <side-bar-item
-        v-for="item in list"
-        :key="item.title"
+        v-for="item in admin_routes"
+        :key="item.path"
         :item="item"
       ></side-bar-item>
-    </my-menu>
+    </el-menu>
   </div>
 </template>
 
 <script>
-import MenuItem from "components/menu/MenuItem";
-import SubMenu from "components/menu/SubMenu";
-import Item from "./Item";
-import MyMenu from "components/menu/Menu";
 import SideBarItem from "./SideBarItem";
 import Logo from "./Logo";
 import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
 export default {
   name: "SideBar",
   components: {
     SideBarItem,
     Logo,
-    MyMenu,
-    MenuItem,
-    SubMenu,
-    Item,
+  },
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
   },
   setup() {
-    const list = ref([]);
-    const activeMenu = ref("项目二");
-    list.value = [
-      { path: "/", icon: "edit", title: "项目一" },
-      {
-        path: "/",
-        icon: "edit",
-        title: "项目二",
-        children: [
-          { path: "/", icon: "edit", title: "项目二-1" },
-          { path: "/", icon: "edit", title: "项目二-2" },
-        ],
-      },
-      { path: "/", icon: "edit", title: "项目三" },
-      {
-        path: "/",
-        icon: "edit",
-        title: "项目四",
-        children: [
-          {
-            path: "/",
-            icon: "edit",
-            title: "项目四-1",
-            children: [
-              { path: "/", icon: "edit", title: "项目四-1-1" },
-              { path: "/", icon: "edit", title: "项目四-1-2" },
-            ],
-          },
-          { path: "/", icon: "edit", title: "项目四-2" },
-        ],
-      },
-      { path: "/", icon: "edit", title: "项目五" },
-    ];
-    return { list, activeMenu };
+    const store = useStore();
+    const admin_routes = store.getters.admin_routes
+    return {admin_routes};
   },
 };
 </script>
@@ -72,10 +50,8 @@ export default {
 .side-bar-container {
   width: 210px;
   display: flex;
-  // flex-wrap: wrap;
   flex-direction: column;
   flex-shrink: 0;
-  transition: width 0.3s;
-  // align-content: flex-start;
+
 }
 </style>

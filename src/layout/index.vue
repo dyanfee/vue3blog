@@ -1,5 +1,5 @@
 <template>
-<!-- 前台界面 -->
+  <!-- 前台界面 -->
   <div class="app-container">
     <div class="layout">
       <Header></Header>
@@ -47,7 +47,9 @@ export default {
     // 钩子函数
     onMounted(() => {
       resizeHandler(({ width }) => {
-        let containerStyle = appContainer.value.style;
+        let containerStyle =
+          (appContainer.value && appContainer.value.style) || null;
+        if (!containerStyle) return;
         let main = mainContent.value.style;
         containerStyle.maxWidth = "";
         containerStyle.padding = "100px 0 0";

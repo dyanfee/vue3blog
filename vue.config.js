@@ -34,7 +34,7 @@ module.exports = {
         }
     },
     css: {
-        requireModuleExtension: false,
+        requireModuleExtension: true,
         loaderOptions: {
             // 默认情况下 `sass` 选项会同时对 `sass` 和 `scss` 语法同时生效
             // 因为 `scss` 语法在内部也是由 sass-loader 处理的
@@ -45,8 +45,7 @@ module.exports = {
             // 如果 sass-loader 版本 < 8，这里使用 `data` 字段
             // 如果 sass-loader 版本 > 8，这里使用 `additionalData` 字段
             scss: {
-                prependData: `@import "~@/assets/css/base.scss";`
-
+                prependData: `@import "~@/styles/base.scss";`
             },
         }
     },

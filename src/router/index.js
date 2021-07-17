@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/home/Home'
 import Layout from '@/layout'
 import Admin from '@/layout/admin'
 
-const constantRoutes = [
+export const constantRoutes = [
   {
     path: '/',
     component: Layout,
@@ -53,29 +52,70 @@ const constantRoutes = [
     path: '/register',
     component: () => import('views/register/Register')
   },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin,
-    children: [
-
-    ]
-  }
-
 ]
 
-const asyncRoutes = [{
+/**  
+ * 后台界面动态路由
+ */
+export const asyncRoutes = [{
   path: '/admin',
   name: 'Admin',
   component: Admin,
+  redirect: '/admin/edit',
+  meta: {
+    title: "文章管理", icon: 'el-icon-menu'
+  },
   children: [
-
+    {
+      path: "/admin/articles",
+      name: 'ArticleManager',
+      component: () => import('views/admin/Articles'),
+      meta: { title: '文章列表', roles: ['0'], icon: 'el-icon-s-order' }
+    },
+    {
+      path: "/admin/edit",
+      name: 'EditArticle',
+      component: () => import('views/admin/EditArticle'),
+      meta: { title: '编辑新建文章', roles: ['0'], icon: 'el-icon-edit' }
+    },
   ]
-}]
-
-const router = createRouter({
+},
+{
+  path: '/user',
+  name: 'User',
+  component: Admin,
+  redirect: '/user/index',
+  meta: {
+    title: "个人中心", icon: 'el-icon-s-custom'
+  },
+  children: [
+    {
+      path: "/user/index",
+      name: 'EditInfo',
+      component: () => import('views/admin/EditInfo'),
+      meta: { title: '编辑博客信息', roles: ['0'], icon: 'el-icon-toilet-paper' }
+    },
+    {
+      path: "/user/EditUser",
+      name: 'EditUser',
+      component: () => import('views/admin/EditUser'),
+      meta: { title: '编辑个人信息', roles: ['0'], icon: 'el-icon-user' }
+    },
+  ]
+}
+]
+const params = {
   history: createWebHistory(process.env.BASE_URL),
+  scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
-})
+}
+
+const router = createRouter(params)
+
+export function resetRouter() {
+  const newRouter = createRouter(params)
+  router.matcher = newRouter.matcher // reset router
+}
+
 
 export default router

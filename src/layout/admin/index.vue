@@ -5,10 +5,9 @@
     <div class="main">
       <div class="">
         <nav-bar />
-        <tags-view />
+        <!-- <tags-view /> -->
       </div>
-      aaaaa
-      <!-- <app-main /> -->
+      <admin-main />
     </div>
   </div>
 </template>
@@ -20,6 +19,7 @@ import { resizeMixin, resizeHandler } from "../resizeHandler";
 import SideBar from "./components/SideBar";
 import TagsView from "./components/TagsView";
 import NavBar from "./components/NavBar";
+import AdminMain from "./components/AdminMain";
 export default {
   name: "Admin",
   mixins: [resizeMixin],
@@ -27,6 +27,7 @@ export default {
     SideBar,
     TagsView,
     NavBar,
+    AdminMain,
   },
   setup(props, ctx) {
     // 钩子函数

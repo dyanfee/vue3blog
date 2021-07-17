@@ -21,10 +21,15 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           const info = await store.dispatch('getInfo')
-          // TODO 根据角色展示不同路由
-          // console.log(info)
-          // next({ ...to, replace: true })
-          next()
+
+          const accessRoutes = await store.dispatch('generateRoutes', ['0'])
+
+          //  根据角色展示不同路由
+          accessRoutes.forEach(e => {
+            router.addRoute(e)
+          })
+          // 确保路由都加上了
+          next({ ...to, replace: true })
         } catch (error) {
           // 报错重新登录
           await store.dispatch('resetToken')

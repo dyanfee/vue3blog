@@ -5,7 +5,7 @@
 </template>
 
 <style lang='scss'>
-@import "~assets/css/base.scss";
+// @import "~assets/css/base.scss";
 @import "~assets/css/base.css";
 
 </style>

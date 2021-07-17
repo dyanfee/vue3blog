@@ -1,15 +1,9 @@
-<template>
-  <div>
-    <icon v-if="icon" :name="icon" />
-    <span v-if="title">{{ title }}</span>
-  </div>
-</template>
-
-
 <script>
-import { h } from "vue";
+import { h } from "@vue/runtime-core";
+import Icon from "@/components/Icon"; // svg组件
 export default {
   name: "Item",
+  functional: true,
   props: {
     icon: {
       type: String,
@@ -20,38 +14,31 @@ export default {
       default: "",
     },
   },
-  // setup(props) {
-  //   console.log(props.icon, props.title);
-  //   const vnodes = [];
-  //   if (props.icon) {
-  //     vnodes.push(<icon name={props.icon} />);
-  //   }
-  //   if (props.title) {
-  //     vnodes.push(<span slot="title">{props.title}</span>);
-  //   }
-  //   return () => {
-  //     console.log(vnodes);
-  //     h(vnodes);
-  //   };
-  // },
-  // render() {
-  //   // const vnodes = [];
-  //   // if (this.icon) {
-  //   //   vnodes.push(<icon name={this.icon} />);
-  //   // }
-  //   // if (this.title) {
-  //   //   vnodes.push(<span slot="title">{this.title}</span>);
-  //   // }
-  //   // return h(vnodes);
-  //   if (this.icon) {
-  //     h("icon", { name: 'edit' });
-  //   }
-  //   // if (this.title) {
-  //   //   h("span", { name: this.icon });
-  //   // }
-  // },
+  render() {
+    const { icon, title } = this;
+    const vnodes = [];
+    if (icon) {
+      if (icon.includes("el-icon")) {
+        vnodes.push(<i class={[icon, "sub-el-icon"]} />);
+      } else {
+        // vnodes.push(<icon name={icon} />);
+        vnodes.push(<Icon name={icon} />);
+        // vnodes.push(h(`icon`, { name: icon }));
+      }
+    }
+
+    if (title) {
+      vnodes.push(<span slot="title">{title}</span>);
+    }
+    return vnodes;
+  },
 };
 </script>
 
-<style lang='scss' scoped>
+<style scoped>
+.sub-el-icon {
+  color: currentColor;
+  width: 1em;
+  height: 1em;
+}
 </style>

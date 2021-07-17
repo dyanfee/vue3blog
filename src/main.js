@@ -1,4 +1,14 @@
+
 import { createApp } from 'vue'
+
+// 引入组件库
+import ElementPlus from 'element-plus'
+import 'element-plus/lib/theme-chalk/index.css'
+import 'dayjs/locale/zh-cn'
+import locale from 'element-plus/lib/locale/lang/zh-cn'
+
+// import "@/styles/base.scss";
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -6,28 +16,20 @@ import store from './store'
 import './permission'
 
 import '@/icons'
-// import Vue from 'vue'
 import Icon from '@/components/Icon' // svg组件
 import * as filters from './filters' // global filters
 
 
-if (window) {
-    window.log = (...args) => {
-        console.log(...args)
-    }
-}
 
 
 const app = createApp(App)
-    .use(store)
-    .use(router)
-    .component('icon', Icon)
+  .use(ElementPlus, { locale })
+  .use(store)
+  .use(router)
+  .component('icon', Icon)
 
 app.$router = router
 
 app.config.globalProperties.$filters = { ...filters }
-// Object.keys(filters).forEach(key => {
-//     App.filter(key, filters[key])
-// })
-// console.log(app.config.globalProperties.$filters)
+
 app.mount('#app')
