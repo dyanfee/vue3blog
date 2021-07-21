@@ -4,7 +4,7 @@
 <script>
 import Editor from "@toast-ui/editor";
 import { ref } from "@vue/reactivity";
-import { onMounted, onUnmounted } from "@vue/runtime-core";
+import { onMounted, onUnmounted, watch } from "@vue/runtime-core";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import useOptions from "./option";
 export default {
@@ -30,10 +30,19 @@ export default {
     const toastuiEditor = ref("");
     const { options } = useOptions(props, emit);
 
-    console.log(options);
+    // console.log(options);
     let editor = null;
+
+    watch(
+      () => props.height,
+      (val) => {
+        console.log(val);
+        editor.setHeight(val);
+      }
+    );
     onMounted(() => {
       editor = createEditor();
+      emit("editor", editor);
     });
     function createEditor() {
       return new Editor({
@@ -52,7 +61,7 @@ export default {
     }
 
     function destroyed() {
-      editorEvents.forEach((event) => {
+      Object.keys(options.events).forEach((event) => {
         editor.off(event);
       });
       editor.destroy();
@@ -62,6 +71,7 @@ export default {
     });
     return {
       toastuiEditor,
+      invoke,
     };
   },
 };

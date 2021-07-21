@@ -3,7 +3,7 @@
     <logo />
     <el-menu
       :uniqueOpened="false"
-      default-active="2"
+      :default-active="defaultActive"
       @open="handleOpen"
       @close="handleClose"
       background-color="transparent"
@@ -24,6 +24,8 @@ import SideBarItem from "./SideBarItem";
 import Logo from "./Logo";
 import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
+import { computed } from "@vue/runtime-core";
+import { useRoute } from "vue-router";
 export default {
   name: "SideBar",
   components: {
@@ -40,18 +42,29 @@ export default {
   },
   setup() {
     const store = useStore();
-    const admin_routes = store.getters.admin_routes
-    return {admin_routes};
+    const route = useRoute();
+    const defaultActive = computed(() => {
+      const { meta, path } = route;
+      if (meta.activeMenu) {
+        return meta.activeMenu;
+      }
+      return path;
+    });
+    const admin_routes = store.getters.admin_routes;
+
+    return {
+      admin_routes,
+      defaultActive,
+    };
   },
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .side-bar-container {
   width: 210px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-
 }
 </style>

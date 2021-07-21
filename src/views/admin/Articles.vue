@@ -37,29 +37,45 @@
 
 <script>
 import { ref } from "@vue/reactivity";
-import { getArticles } from "network/article";
+import { getArticles, deleteArticle } from "network/article";
 import { watch } from "@vue/runtime-core";
 import { formatDate } from "@/utils";
+import { useRouter } from "vue-router";
 export default {
   name: "Articles",
   setup(props) {
+    const router = useRouter();
     const articleData = ref([]);
     const search = ref("");
-
+    _getArticles();
     watch(search, (val) => {
       // console.log(val);
     });
 
-    getArticles()
-      .then((res) => {
-        articleData.value = res.body;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    function _getArticles() {
+      getArticles()
+        .then((res) => {
+          articleData.value = res.body;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
 
-    function handleEdit(index, item) {}
-    function handleDelete(index, item) {}
+    function handleEdit(index, item) {
+      const query = { id: item.id, title: item.title };
+      router.push({
+        name: "EditArticle",
+        query,
+      });
+    }
+    function handleDelete(index, item) {
+      const params = { id: item.id };
+      deleteArticle(params).then((res) => {
+        console.log(res);
+        _getArticles();
+      });
+    }
     return {
       articleData,
       search,
@@ -71,5 +87,4 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

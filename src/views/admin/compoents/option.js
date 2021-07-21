@@ -12,8 +12,9 @@ const editorEvents = [
 const defaultValueMap = {
   initialEditType: 'markdown',
   initialValue: '',
-  height: '600px',
+  height: '666px',
   previewStyle: 'vertical',
+  placeholder: '请输入文章内容'
 };
 
 export default function useOptions(props, emit) {

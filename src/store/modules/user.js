@@ -98,6 +98,7 @@ function getUserInfo(commit) {
     const token = getToken()
     getInfo({token}).then(res => {
       const { id, nickName, email } = res.body
+      
       commit('SET_USER_ID', id)
       // commit('SET_AVATAR', '')
       commit('SET_USER_NAME', nickName)

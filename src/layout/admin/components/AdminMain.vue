@@ -2,9 +2,9 @@
   <section class="admin-main">
     <router-view v-slot="{ Component }">
       <transition name="fade-transform" mode="out-in">
-        <keep-alive>
+        <!-- <keep-alive> -->
           <component :is="Component" />
-        </keep-alive>
+        <!-- </keep-alive> -->
       </transition>
     </router-view>
   </section>

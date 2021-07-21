@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb class="app-breadcrumb" separator="/">
+  <el-breadcrumb class="app-breadcrumb" separator-class="el-icon-arrow-right">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
         <span
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import pathToRegexp from "path-to-regexp";
+import { pathToRegexp, compile } from "path-to-regexp";
 import { ref } from "@vue/reactivity";
 import { useRoute, useRouter } from "vue-router";
 import { watch } from "@vue/runtime-core";
@@ -33,10 +33,8 @@ export default {
       getBreadcrumb();
     });
     function getBreadcrumb() {
-      let matched = route.matched.filter(
-        (item) => item.meta && item.meta.title
-      );
-      matched = [{ path: "/", meta: { title: "首页" } }].concat(matched);
+      let matched = route.matched.filter((item) => item.meta && item.meta.title);
+      matched = [{ path: "/home", meta: { title: "首页" } }].concat(matched);
       levelList.value = matched.filter(
         (item) => item.meta && item.meta.title && item.meta.breadcrumb !== false
       );
@@ -44,7 +42,7 @@ export default {
 
     function pathCompile(path) {
       const { params } = route;
-      var toPath = pathToRegexp.compile(path);
+      var toPath = compile(path);
       return toPath(params);
     }
     function handleLink(item) {
@@ -53,6 +51,7 @@ export default {
         router.push(redirect);
         return;
       }
+      console.log(pathCompile(path));
       router.push(pathCompile(path));
     }
     return {

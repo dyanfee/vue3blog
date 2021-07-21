@@ -103,3 +103,32 @@ export const hex2RGB = function (sColor) {
     }
     return sColor;
 };
+
+/** 
+ * 获取元素绝对位置 Left
+ */
+ export function getElementLeft(element) {
+  var actualLeft = element.offsetLeft;
+  var current = element.offsetParent;
+
+  while (current !== null) {
+    actualLeft += current.offsetLeft;
+    current = current.offsetParent;
+  }
+
+  return actualLeft;
+}
+/** 
+ * 获取元素绝对位置 Top
+ */
+export function getElementTop(element) {
+  var actualTop = element.offsetTop;
+  var current = element.offsetParent;
+
+  while (current !== null) {
+    actualTop += current.offsetTop;
+    current = current.offsetParent;
+  }
+
+  return actualTop;
+}

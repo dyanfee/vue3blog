@@ -9,8 +9,8 @@
       </router-link>
     </template>
     <template v-slot:content>
-      <div class="tag-item" v-for="item in 10" :key="item">
-        <tag size="medium" roundable>{{ item }}标签</tag>
+      <div class="tag-item" v-for="(item, index) in hotTags" :key="index">
+        <tag size="medium" roundable>{{ item.tagName }}</tag>
       </div>
     </template>
   </base-card>
@@ -19,16 +19,36 @@
 <script>
 import Tag from "components/Tag";
 import BaseCard from "./BaseCard";
+import { ref } from "@vue/reactivity";
+import { getHotTags } from "network/tags";
+import { onMounted } from "@vue/runtime-core";
 export default {
   name: "CardHotTag",
   components: {
     Tag,
     BaseCard,
   },
+  setup(props) {
+    const hotTags = ref([]);
+
+    onMounted(() => {
+      getHotTags()
+        .then((res) => {
+          console.log(res);
+          hotTags.value = res.body;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+    return {
+      hotTags,
+    };
+  },
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 span {
   @include text-hover;
 }

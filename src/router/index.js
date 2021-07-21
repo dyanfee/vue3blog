@@ -61,7 +61,7 @@ export const asyncRoutes = [{
   path: '/admin',
   name: 'Admin',
   component: Admin,
-  redirect: '/admin/edit',
+  redirect: '/admin/articles',
   meta: {
     title: "文章管理", icon: 'el-icon-menu'
   },
@@ -70,13 +70,13 @@ export const asyncRoutes = [{
       path: "/admin/articles",
       name: 'ArticleManager',
       component: () => import('views/admin/Articles'),
-      meta: { title: '文章列表', roles: ['0'], icon: 'el-icon-s-order' }
+      meta: { title: '文章列表', roles: ['0'], }
     },
     {
       path: "/admin/edit",
       name: 'EditArticle',
       component: () => import('views/admin/EditArticle'),
-      meta: { title: '编辑新建文章', roles: ['0'], icon: 'el-icon-edit' }
+      meta: { title: '编辑新建文章', roles: ['0'], }
     },
   ]
 },
@@ -93,13 +93,13 @@ export const asyncRoutes = [{
       path: "/user/index",
       name: 'EditInfo',
       component: () => import('views/admin/EditInfo'),
-      meta: { title: '编辑博客信息', roles: ['0'], icon: 'el-icon-toilet-paper' }
+      meta: { title: '编辑博客信息', roles: ['0'], }
     },
     {
       path: "/user/EditUser",
       name: 'EditUser',
       component: () => import('views/admin/EditUser'),
-      meta: { title: '编辑个人信息', roles: ['0'], icon: 'el-icon-user' }
+      meta: { title: '编辑个人信息', roles: ['0'], }
     },
   ]
 }

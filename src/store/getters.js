@@ -1,6 +1,6 @@
 const getters = {
   plateform: state => state.app.plateform,
-  userId: state => state.user.userId,
+  userId: state => state.user.id,
   nickName: state => state.user.name,
   avatar: state => state.user.avatar,
   roles: state => state.user.roles,
