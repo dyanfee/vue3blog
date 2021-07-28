@@ -11,6 +11,16 @@ export function getArticles(params) {
   })
 }
 /** 
+ * 获取首页信息
+ */
+export function getHomeInfo(params) {
+  return request({
+    url: '/homeInfo',
+    method: "GET",
+    params
+  })
+}
+/** 
  * 通过id获取文章
  */
 export function getArticle(params) {
@@ -51,7 +61,7 @@ export function deleteArticle(params) {
   })
 }
 /** 
- * 获取所有分类
+ * 获取所有分类类型
  */
 export function allCategories() {
   return request({
@@ -66,5 +76,16 @@ export function allTags() {
   return request({
     url: '/allTags',
     method: "GET",
+  })
+}
+
+/** 
+ * 获取所有分类
+ */
+export function getCategoryList(params) {
+  return request({
+    url: '/categoryList',
+    method: "GET",
+    params
   })
 }

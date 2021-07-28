@@ -5,7 +5,7 @@ import { request } from './request'
  */
 export function login(params) {
   return request({
-    url: '/users/login',
+    url: '/login',
     method: "POST",
     data: params
   })
@@ -16,7 +16,7 @@ export function login(params) {
  */
 export function getInfo(params) {
   return request({
-    url: '/users/getInfo',
+    url: '/getInfo',
     method: 'POST',
     data: params
   })

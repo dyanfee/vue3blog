@@ -4,7 +4,7 @@
     <div class="detail_info">
       <icon-text i="calendar">2021-07-04</icon-text>
       <icon-text i="eye">{{ post.views }}</icon-text>
-      <icon-text i="comment">99</icon-text>
+      <!-- <icon-text i="comment">99</icon-text> -->
       <icon-text i="thumbs-up">199</icon-text>
     </div>
     <div class="detail_content">

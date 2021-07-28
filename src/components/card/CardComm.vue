@@ -7,8 +7,7 @@
       <div class="card-text" v-if="text">{{ text }}</div>
       <ul class="card-items" v-if="items">
         <li v-for="item in items" :key="item">
-          {{ item }}content content contentntent content contentntent content
-          contentntent content contentntent content content
+          {{ item.title }}
         </li>
       </ul>
     </template>
@@ -41,7 +40,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .card-text {
   letter-spacing: 0.5px;
 }

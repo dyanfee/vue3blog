@@ -16,10 +16,21 @@
         </router-link>
       </div>
       <div v-else>
-        <span>{{ nickName }}</span>
-        <router-link to="/admin">
-          <span>个人中心</span>
-        </router-link>
+        <el-dropdown trigger="click" @command="handleCommand">
+          <span class="el-dropdown-link">
+            {{ nickName }}<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click.native="toAdmin">
+                <span>个人中心</span>
+              </el-dropdown-item>
+              <el-dropdown-item command="logOut">
+                <router-link to="/"> 退出登录 </router-link>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
     </div>
   </div>
@@ -29,6 +40,7 @@
 import Category from "components/menu";
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   name: "Header",
   components: {
@@ -36,16 +48,25 @@ export default {
   },
   setup() {
     const store = useStore();
-    // const nickName = ref("");
-    const isLogin = computed(() => {
-      return store.getters.isLogin;
-    });
-    // nickName.value = store.getters.nickName;
+    const router = useRouter();
+    const isLogin = computed(() => store.getters.isLogin);
     const nickName = computed(() => store.getters.nickName);
-    console.log(nickName.value);
+
+    const handleCommand = (e) => {
+      if (e == "logOut") {
+        store.dispatch("logOut");
+      }
+    };
+    function toAdmin() {
+      router.push({
+        path: "/admin",
+      });
+    }
     return {
       nickName,
       isLogin,
+      handleCommand,
+      toAdmin,
     };
   },
 };

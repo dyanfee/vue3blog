@@ -1,22 +1,22 @@
 <template>
   <!-- <yf-transition> -->
-    <div class="category">
-      <CateItem
-        class=""
-        v-for="(item, index) in categories"
-        :key="index"
-        :item="item"
-        @clickItem="clickItem"
-        :curIndex="curIndex"
-      >
-        {{ item.name }}
-      </CateItem>
-    </div>
+  <div class="category">
+    <CateItem
+      class=""
+      v-for="(item, index) in categories"
+      :key="index"
+      :item="item"
+      @clickItem="clickItem"
+      :curIndex="curIndex"
+    >
+      {{ item.name }}
+    </CateItem>
+  </div>
   <!-- </yf-transition> -->
 </template>
 
 <script>
-import { computed, getCurrentInstance, onMounted, ref } from "vue";
+import { computed, getCurrentInstance } from "vue";
 import CateItem from "./CateItem";
 import YfTransition from "components/comm-transition";
 export default {
@@ -37,21 +37,13 @@ export default {
   },
   watch: {},
   setup(props, ctx) {
-    onMounted(() => {
-      // const app = getCurrentInstance();
-      // const route = app.appContext.config.globalProperties.$route;
-      // console.log(route.path);
-    });
     const curIndex = computed(() => {
       const app = getCurrentInstance();
       // 直接获取
       const route = app.appContext.config.globalProperties.$route;
-      // console.log(route);
       return route.path;
     });
-    function clickItem(item) {
-      curIndex.value = item.id;
-    }
+    function clickItem(item) {}
     return {
       clickItem,
       curIndex,

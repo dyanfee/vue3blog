@@ -10,13 +10,15 @@
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
-          <i class="el-icon-caret-bottom" />
+          <i class="el-icon-caret-top icon-fix"></i>
         </div>
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <el-dropdown-item divided @click.native="logout">
-            <span style="display: block">Log Out</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click.native="logout">
+              <router-link to="/"> 退出登录 </router-link>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
       </el-dropdown>
     </div>
   </div>
@@ -42,8 +44,8 @@ export default {
       // store.dispatch("app/toggleSideBar");
     }
     async function logout() {
-      await store.dispatch("loginOut");
-      router.push(`/login?redirect=${route.fullPath}`);
+      await store.dispatch("logOut");
+      router.push(`/home?redirect=${route.fullPath}`);
     }
     return {
       toggleSideBar,
@@ -113,12 +115,15 @@ export default {
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
-
+        padding-right: 10px;
         .user-avatar {
           cursor: pointer;
           width: 40px;
           height: 40px;
           border-radius: 10px;
+        }
+        .icon-fix {
+          transform: rotateX(180deg);
         }
 
         .el-icon-caret-bottom {

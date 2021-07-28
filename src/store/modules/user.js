@@ -72,7 +72,7 @@ const actions = {
   getInfo({ commit }) {
     return getUserInfo(commit)
   },
-  loginOut({ commit }) {
+  logOut({ commit }) {
     removeToken()
     commit(SET_TOKEN, '')
     commit('SET_USER_ID', '')
@@ -93,7 +93,6 @@ const actions = {
 }
 
 function getUserInfo(commit) {
-  console.log('getUserInfo')
   return new Promise((resolve, reject) => {
     const token = getToken()
     getInfo({token}).then(res => {

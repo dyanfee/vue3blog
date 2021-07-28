@@ -6,8 +6,7 @@
     <template v-slot:content>
       <ul class="card-items" v-if="items">
         <li v-for="item in items" :key="item">
-          {{ item }}content content contentntent content contentntent content
-          contentntent content contentntent content content
+          {{ item.content }}
         </li>
       </ul>
     </template>

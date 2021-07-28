@@ -21,7 +21,6 @@ import Tag from "components/Tag";
 import BaseCard from "./BaseCard";
 import { ref } from "@vue/reactivity";
 import { getHotTags } from "network/tags";
-import { onMounted } from "@vue/runtime-core";
 export default {
   name: "CardHotTag",
   components: {
@@ -31,16 +30,13 @@ export default {
   setup(props) {
     const hotTags = ref([]);
 
-    onMounted(() => {
-      getHotTags()
-        .then((res) => {
-          console.log(res);
-          hotTags.value = res.body;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+    getHotTags()
+      .then((res) => {
+        hotTags.value = res.body;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     return {
       hotTags,
     };

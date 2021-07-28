@@ -21,7 +21,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           const info = await store.dispatch('getInfo')
-
+          await store.dispatch('blogInfo')
           const accessRoutes = await store.dispatch('generateRoutes', ['0'])
 
           //  根据角色展示不同路由

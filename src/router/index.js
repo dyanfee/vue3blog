@@ -27,6 +27,16 @@ export const constantRoutes = [
         component: () => import('views/category/Category'),
       },
       {
+        path: 'cateTagDetail',
+        name: 'CateTagDetail',
+        component: () => import('views/category/CateTagDetail'),
+      },
+      {
+        path: 'tags',
+        name: 'Tags',
+        component: () => import('views/tags/Tags'),
+      },
+      {
         path: 'archives',
         name: 'Archives',
         component: () => import('views/archives/Archives'),
@@ -37,12 +47,6 @@ export const constantRoutes = [
         component: () => import('views/detail/Detail'),
       }
     ]
-  },
-  {
-    path: '/tags',
-    name: 'Tags',
-
-    component: () => import('views/tags/Tags'),
   },
   {
     path: '/login',
