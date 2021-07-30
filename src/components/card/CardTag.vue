@@ -8,6 +8,7 @@
 
 <script>
 import { computed } from "@vue/runtime-core";
+import { rand } from "@/utils";
 export default {
   props: {
     item: {
@@ -18,12 +19,14 @@ export default {
     },
   },
   setup(props) {
+    const { id, count, max } = props.item;
+
     const size = computed(() => {
-      return Math.floor(Math.random() * 30 + 20) + "px";
+      return Math.floor((count / max) * 20 + 20) + "px";
     });
     const color = computed(() => {
-      // console.log(Math.floor(Math.random() * "0xffffff").toString(16));
-      return "#" + Math.floor(Math.random() * "0xffffff").toString(16);
+      const n = "0x" + id.substr(0, 6);
+      return "#" + Math.floor((rand(n) / n) * "0xffffff").toString(16);
     });
     return { size, color };
   },
@@ -38,7 +41,6 @@ export default {
   display: flex;
   align-items: flex-end;
   padding: 0 5px;
-  padding-bottom: 5px;
-
+  margin-bottom: 10px;
 }
 </style>

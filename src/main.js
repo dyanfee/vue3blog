@@ -19,7 +19,7 @@ import '@/icons'
 import Icon from '@/components/Icon' // svg组件
 import * as filters from './filters' // global filters
 
-
+console.log('%cyanfee.com','color:#fff;background:#000;line-height:18px;border-radius:3px;')
 
 
 const app = createApp(App)

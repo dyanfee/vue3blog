@@ -17,12 +17,11 @@
       <div class="detail_footer-article">
         <div>
           分类:
-          <span>程序人生</span>
+          <span>{{ post.category }}</span>
         </div>
-        <div>
+        <div v-if="post.tags && post.tags.length">
           标签:
-          <span>vue</span>
-          <span>react</span>
+          <span v-for="(item, index) in post.tags" :key="index">{{ item }}</span>
         </div>
       </div>
       <div class="detail_footer-button">
@@ -35,10 +34,7 @@
       </div>
     </div>
     <div class="comment-area">
-      <comment-input
-        @replySuccess="replySuccess"
-        :replyInfo="replyInfo"
-      ></comment-input>
+      <comment-input @replySuccess="replySuccess" :replyInfo="replyInfo"></comment-input>
       <comment-item
         @replySuccess="replySuccess"
         :comment="item"
@@ -130,7 +126,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .detail {
   display: flex;
   flex-direction: column;
@@ -180,7 +176,7 @@ export default {
       span {
         @include text-hover;
         margin-left: 10px;
-        border: 1px red solid;
+        // border: 1px red solid;
       }
       & > * {
         padding: 8px 5px;

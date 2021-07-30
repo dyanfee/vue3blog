@@ -11,6 +11,26 @@ export function getArticles(params) {
   })
 }
 /** 
+ * 根据categoryid获取文章列表
+ */
+export function getArticleByCate(params) {
+  return request({
+    url: '/getArticleByCate',
+    method: "GET",
+    params
+  })
+}
+/** 
+ * 根据tagid获取文章列表
+ */
+export function getArticleByTag(params) {
+  return request({
+    url: '/getArticleByTag',
+    method: "GET",
+    params
+  })
+}
+/** 
  * 获取首页信息
  */
 export function getHomeInfo(params) {

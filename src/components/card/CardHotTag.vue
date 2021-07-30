@@ -10,7 +10,7 @@
     </template>
     <template v-slot:content>
       <div class="tag-item" v-for="(item, index) in hotTags" :key="index">
-        <tag size="medium" roundable>{{ item.tagName }}</tag>
+        <tag @click="clickTag(item)" size="medium" roundable>{{ item.tagName }}</tag>
       </div>
     </template>
   </base-card>
@@ -21,6 +21,7 @@ import Tag from "components/Tag";
 import BaseCard from "./BaseCard";
 import { ref } from "@vue/reactivity";
 import { getHotTags } from "network/tags";
+import { useRoute, useRouter } from "vue-router";
 export default {
   name: "CardHotTag",
   components: {
@@ -28,6 +29,7 @@ export default {
     BaseCard,
   },
   setup(props) {
+    const router = useRouter();
     const hotTags = ref([]);
 
     getHotTags()
@@ -37,8 +39,21 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+
+    function clickTag(item) {
+      const query = {
+        id: item.id,
+        type: "1",
+        name: item.tagName,
+      };
+      router.push({
+        path: "cateTagDetail",
+        query,
+      });
+    }
     return {
       hotTags,
+      clickTag,
     };
   },
 };

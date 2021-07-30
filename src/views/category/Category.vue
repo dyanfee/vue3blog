@@ -46,7 +46,6 @@ export default {
     }
 
     function clickItem(item) {
-      console.log(item);
       const query = {
         id: item.id,
         type: "0",

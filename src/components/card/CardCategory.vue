@@ -2,7 +2,7 @@
   <div class="cate-card">
     <div class="cate-card-header">{{ item.name }}</div>
     <!-- <div class="cate-card-desc">前端的技术哈哈哈哈急急急急急急</div> -->
-    <div class="cate-card-content">{{ item.count }}篇文章</div>
+    <div class="cate-card-content">{{ item.count || 0 }}篇文章</div>
   </div>
 </template>
 

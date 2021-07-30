@@ -26,6 +26,9 @@ export default {
   setup(props) {
     const tags = ref([]);
     const router = useRouter();
+
+
+    
     getTagsList().then((res) => {
       const data = res.body;
       let max = 0;
@@ -39,6 +42,8 @@ export default {
       });
       tags.value = data;
     });
+
+
     function clickTag(item) {
       const query = {
         id: item.id,
