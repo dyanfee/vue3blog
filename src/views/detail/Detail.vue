@@ -2,17 +2,18 @@
   <div class="detail">
     <div class="detail_header">{{ post.title }}</div>
     <div class="detail_info">
-      <icon-text i="calendar">2021-07-04</icon-text>
+      <icon-text i="calendar">{{ format(post.createTime) }}</icon-text>
       <icon-text i="eye">{{ post.views }}</icon-text>
       <!-- <icon-text i="comment">99</icon-text> -->
       <icon-text i="thumbs-up">199</icon-text>
     </div>
     <div class="detail_content">
-      {{ post.content }}
+      <md-viewer :initialValue="post.content"></md-viewer>
+      <!-- {{ post.content }} -->
     </div>
     <div class="detail_footer">
       <div class="detail_footer-updtime">
-        <span>更新于{{ "2021-7-6 23:34:00" }}</span>
+        <span>更新于{{ $filters.formatTime(post.updateTime) }}</span>
       </div>
       <div class="detail_footer-article">
         <div>
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from "@vue/runtime-core";
+import { onMounted, reactive, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { getArticle } from "network/article";
 import { getComments } from "network/comment";
@@ -58,6 +59,8 @@ import Icon from "components/Icon";
 import CommentInput from "components/comment/CommentInput";
 import MyButton from "components/button";
 import CommentItem from "components/comment/CommentItem";
+import MdViewer from "./MdViewer";
+import { formatDate } from "@/utils";
 export default {
   name: "Detail",
   components: {
@@ -67,6 +70,7 @@ export default {
     Icon,
     CommentInput,
     CommentItem,
+    MdViewer,
   },
   data() {
     return {
@@ -113,6 +117,9 @@ export default {
     function replySuccess() {
       _getComments(id);
     }
+    function format(date) {
+      return formatDate(date, "yyyy-MM-dd");
+    }
     return {
       post,
       comments,
@@ -121,6 +128,8 @@ export default {
       clickShare,
       submit,
       replySuccess,
+      format,
+      formatDate,
     };
   },
 };
@@ -128,6 +137,7 @@ export default {
 
 <style lang="scss" scoped>
 .detail {
+  white-space: pre-wrap;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -141,6 +151,7 @@ export default {
     font-size: 26px;
     font-weight: 500;
     padding: 20px;
+    text-align: center;
   }
 
   .detail_info {

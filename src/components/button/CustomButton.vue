@@ -29,7 +29,7 @@ export default {
 
 <style lang='scss' scoped>
 .my-button {
-  padding: 10px 50px;
+  padding: 10px 40px;
   font-size: 14px;
 }
 </style>

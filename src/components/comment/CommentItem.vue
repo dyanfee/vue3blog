@@ -90,7 +90,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .comment-item {
   width: 100%;
   font-size: 14px;
@@ -121,12 +121,17 @@ export default {
     .footer-func {
       display: flex;
       transition: all 0.3s;
+      cursor: pointer;
       padding-bottom: 10px;
       border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
 
       & > * {
         padding-left: 5px;
         color: $color-high-text-l;
+      }
+
+      & > *:hover {
+        color: $color-text-comm;
       }
     }
     .comment-replay {

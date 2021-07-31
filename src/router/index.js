@@ -45,6 +45,7 @@ export const constantRoutes = [
         path: '/detail/:id',
         name: 'Detail',
         component: () => import('views/detail/Detail'),
+        // component: () => import('views/detail/Temp'),
       }
     ]
   },
