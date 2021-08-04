@@ -8,7 +8,7 @@
       <icon-text i="thumbs-up">199</icon-text>
     </div>
     <div class="detail_content">
-      <md-viewer :initialValue="post.content"></md-viewer>
+      <md-viewer @load="loadContent" :initialValue="post.content"></md-viewer>
       <!-- {{ post.content }} -->
     </div>
     <div class="detail_footer">
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { onMounted, reactive, ref } from "@vue/runtime-core";
+import { nextTick, onMounted, reactive, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { getArticle } from "network/article";
 import { getComments } from "network/comment";
@@ -120,6 +120,9 @@ export default {
     function format(date) {
       return formatDate(date, "yyyy-MM-dd");
     }
+    function loadContent(viewer) {
+      console.log("md内容加载完成");
+    }
     return {
       post,
       comments,
@@ -129,6 +132,7 @@ export default {
       submit,
       replySuccess,
       format,
+      loadContent,
       formatDate,
     };
   },
