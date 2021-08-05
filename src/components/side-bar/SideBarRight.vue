@@ -53,7 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 .side-bar {
-  width: 300px;
+  width: 260px;
   flex-shrink: 0;
   margin-left: 20px;
 }

@@ -51,18 +51,18 @@ export default {
     }
 
     function clickCatalog(item) {
-      // console.log(item);
       jump(item);
     }
     function clickCatalogSub(item) {
-      // console.log(item);
       jump(item);
     }
     function jump(item) {
-      activeId.value = item.nodeId;
       // 60 是header 栏的偏移值
       document.documentElement.scrollTop = item.offsetTop - 60;
       // document.documentElement.scrollTo(0, item.offsetTop - 60);
+      setTimeout(() => {
+        activeId.value = item.nodeId;
+      }, 50);
     }
     function scrollHander() {
       if (!catalog.value.length) return;

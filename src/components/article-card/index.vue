@@ -16,13 +16,11 @@
     </div>
     <div class="article-card-content">
       <span>
-        {{ item.content }}
+        {{ content }}
       </span>
     </div>
     <div class="article-card-footer">
-      <icon-text class="article-card-desc_item" i="user">{{
-        item.nickName
-      }}</icon-text>
+      <icon-text class="article-card-desc_item" i="user">{{ item.nickName }}</icon-text>
       <div class="article-card-footer__center">
         <tag @click.stop="clickCate">{{ item.category }}</tag>
       </div>
@@ -38,6 +36,7 @@ import IconText from "components/Icon/IconText.vue";
 import Tag from "components/Tag";
 import { formatDate } from "@/utils";
 import { useRoute, useRouter } from "vue-router";
+import { ref } from "@vue/reactivity";
 export default {
   name: "ArticleCard",
   props: {
@@ -50,11 +49,15 @@ export default {
   },
   setup(props) {
     const router = useRouter();
+    const content = ref("");
+    const reg = /[\\\`\*\_\[\]\#\+\-\!\>\n]/g;
+    content.value = props.item.content.replace(reg, " ");
 
     function formatTime(value) {
       const date = new Date(value);
       return formatDate(date);
     }
+
     function clickCard() {
       router.push({
         path: "/detail/" + props.item.id,
@@ -64,6 +67,7 @@ export default {
       console.log(e);
     }
     return {
+      content,
       formatTime,
       clickCard,
       clickCate,
@@ -76,7 +80,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .article-card {
   @include hover-up(5px, 0, -5px);
   margin-bottom: 10px;
